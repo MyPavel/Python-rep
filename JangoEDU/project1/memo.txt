@@ -1,0 +1,5 @@
+venv\scripts\activate включение виртуального пространства
+python manage.py migrate
+python manage.py runserver - запуск проекта Джанго
+admin adminadmin
+ctrl + pause - остановка сервера
