@@ -1,0 +1,61 @@
+# Create users
+User1 = User.objects.create_user(username='Ivan')
+User2 = User.objects.create_user(username='Elena')
+
+# Создание авторов
+Author1 = Author.objects.create(authorUser=User1)
+Author2 = Author.objects.create(authorUser=User2)
+
+# Создание категорий
+Category.objects.create(categoryName='World')
+Category.objects.create(categoryName='Country')
+Category.objects.create(categoryName='Crime')
+Category.objects.create(categoryName='Sport')
+
+# Создание двух статьей и одной новости
+Post.objects.create(postAuthor=Author1, categoryChoice='AR', title='fake article1', text='This is fake article 1')
+Post.objects.create(postAuthor=Author2, categoryChoice='AR', title='fake article2', text='This is fake article 2')
+Post.objects.create(postAuthor=Author1, categoryChoice='NE', title='fake news1', text='This is fake news 1')
+
+# Добавление категорий
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=1))
+Post.objects.get(id=1).postCategory.add(Category.objects.get(id=2))
+Post.objects.get(id=2).postCategory.add(Category.objects.get(id=3))
+Post.objects.get(id=3).postCategory.add(Category.objects.get(id=4))
+
+# Добавление комментариев
+Comment.objects.create(commentPost=Post.objects.get(id=1), commentUser=User1, text='This is comment 1 to post 1 by User 1')
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=User1, text='This is comment 1 to post 2 by User 1')
+Comment.objects.create(commentPost=Post.objects.get(id=2), commentUser=User2, text='This is comment 1 to post 2 by User 2')
+Comment.objects.create(commentPost=Post.objects.get(id=3), commentUser=User2, text='This is comment 1 to post 3 by User 2')
+
+# Лайки и дизлайки
+Comment.objects.get(id=1).dislike()
+Comment.objects.get(id=1).dislike()
+Comment.objects.get(id=2).like()
+Comment.objects.get(id=3).like()
+Comment.objects.get(id=4).like()
+Post.objects.get(id=1).like()
+Post.objects.get(id=2).like()
+Post.objects.get(id=3).dislike()
+Post.objects.get(id=1).dislike()
+
+# Обновление рейтинга авторов
+a = Author.objects.get(id=1)
+a.update_rating()
+a.authorRating
+b = Author.objects.get(id=2)
+b.update_rating()
+b.authorRating
+
+# Автор с лучшим рейтингом
+best_Author=Author.objects.order_by('-authorRating')[0]
+best_Author
+
+# Вывод лучшей статьи даты добавления, автора, рейтинга, превью и лучше статьи
+best_post=Post.objects.order_by('-rating')[0]
+best_post
+
+# Вывести все комментарии к статье
+comments=best_post.comment_set.all()
+comments
