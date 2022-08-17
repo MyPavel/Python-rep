@@ -9,7 +9,7 @@ F_WORDS = ['вакуум', 'вакуума', 'Цыгане', 'цыганског
 @register.filter()
 def censor(in_text):
    for word in in_text.split():
-      if word in F_WORDS:
+      if word.lower() in F_WORDS:
          in_text = in_text.replace(
             word,
             f'{word[0]}{"*" * (len(word) - 1)}'
