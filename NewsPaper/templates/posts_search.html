@@ -8,9 +8,13 @@ Posts
 {% endblock title %}
 
 {% block content %}
-
-   <h1>Last fake news</h1>
+   <h1>News search</h1>
    <h3>{{ time_now|date:'M d Y' }}</h3>
+
+<form action="" method="get">
+   {{ filterset.form.as_p }}
+   <input type="submit" value="Найти" />
+</form>
 
 
    <hr>

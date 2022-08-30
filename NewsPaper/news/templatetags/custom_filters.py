@@ -3,7 +3,7 @@ from django import template
 
 register = template.Library()
 
-F_WORDS = ['вакуум', 'вакуума', 'Цыгане', 'цыганского']
+F_WORDS = ['вакуум', 'вакуума', 'цыгане', 'цыганского']
 
 
 @register.filter()
