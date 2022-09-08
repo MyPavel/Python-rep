@@ -68,6 +68,7 @@ class PostDelete(PermissionRequiredMixin, DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('post_list')
+    permission_required = ('news.delete_post')
 
 
 
