@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h2>Страница пользователя {{request.user.username}}</h2>
+<div> Приветствуем на новостном портале Fake news. Здесь вы можете ознакомится
+    с <p><a href="http://127.0.0.1:8000/posts/">последними новостями</a></p>
+
+
+{% if is_not_author %}
+или стать автором:
+<button> <a href="sign/upgrade/"> Хочу стать автором!</a> </button>
+{% endif %}
+
+<button> <a href="sign/logout/">Выйти</a> </button>
+{% endblock %}

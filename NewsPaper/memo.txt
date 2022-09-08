@@ -1,1 +1,5 @@
-admin adminadmin
+admin@example.com adminadmin
+Ivan_common@example.com France1789
+Sveta_Author@example.com France1789
+
+Редактирование профиля http://127.0.0.1:8000/sign/<user.id>/edit/

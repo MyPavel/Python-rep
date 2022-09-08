@@ -11,7 +11,9 @@ Posts
 
    <h1>Last fake news</h1>
    <h3>{{ time_now|date:'M d Y' }}</h3>
-
+    {% if is_author %}
+    <a class="nav-link" href="/posts/create/">Создать новость</a>
+    {% endif %}
 
    <hr>
    {% if posts %}
