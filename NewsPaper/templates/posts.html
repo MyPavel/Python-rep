@@ -26,11 +26,15 @@ Posts
                <div>
                    <p style="text-align: justify;">{{ post.text|truncatewords:20|censor }}</p>
                </div>
+
+               <a href="{% url 'post_detail' post.id %}">Подробнее</a>
+
                <div>
                     <p style="text-align: center;">Дата публикации: {{ post.date|date:'d M Y' }}&nbsp;</p>
                     <hr />
                     <p style="text-align: center;">&nbsp;</p>
                </div>
+
            </tr>
            {% endfor %}
 

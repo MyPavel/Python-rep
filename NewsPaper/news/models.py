@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.urls import reverse
 
+
 class Author(models.Model):
     authorUser = models.OneToOneField(User, on_delete=models.CASCADE)
     authorRating = models.IntegerField(default=0)
@@ -25,9 +26,15 @@ class Author(models.Model):
 
 class Category(models.Model):
     categoryName = models.CharField(max_length=150, unique=True)
+    subscribers = models.ManyToManyField(User, through='CategorySubscribers', blank=True)
 
     def __str__(self):
         return f'{self.categoryName}'
+
+
+class CategorySubscribers(models.Model):
+    subscriberThrough = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    categoryThrough = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
 
 
 class Post(models.Model):
@@ -66,10 +73,13 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
 
+
 class PostCategory(models.Model):
     postThrough = models.ForeignKey(Post, on_delete=models.CASCADE)
     categoryThrough = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.postThrough)
 
 
 class Comment(models.Model):

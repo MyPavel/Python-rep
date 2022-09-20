@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,10 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'news',
+    'news.apps.NewsConfig',
     'fpages',
     'django.contrib.flatpages',
     'django_filters',
+    'django_apscheduler',
     'sign',
     'protect',
     'allauth',
@@ -51,12 +53,28 @@ INSTALLED_APPS = [
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
+load_dotenv()
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
+
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv(
+    "EMAIL")
+EMAIL_HOST_PASSWORD = os.getenv("SECRET_KEY")
+EMAIL_USE_SSL = True
+
+
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_FORMS = {'signup': 'sign.models.CommonSignupForm'}
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+SERVER_EMAIL = 'dabaepoh@yandex.ru'
 
 SITE_ID = 1
 
@@ -150,3 +168,5 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25

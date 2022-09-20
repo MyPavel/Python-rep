@@ -3,13 +3,34 @@
 {% load custom_filters %}
 
 {% block title %}
-Post
+Статья
 {% endblock title %}
 
 {% block content %}
 <p><strong>{{ post.title|censor }}</strong></p>
 <p style="text-align: justify;">{{ post.text|censor }}</p>
-<p>&nbsp;</p>
+Код статьи: {{ post.categoryChoice }}<br>
+Категория новости: {% for category in post.Category.all %}
+{{category}}
+{% endfor %}
 <p>Дата публикации: {{ post.date|date:'d M Y' }}</p>
+
+{% if not is_subscribe %}
+<b>Подписаться на категорию</b>
+    {% for category in post.Category.all %}
+        <a class="btn" href="add_subscribe/{{ category.id }}"><button type="submit"  name="pk" >{{category}}</button></a>
+    {% endfor %}
+{% else %}
+<b>Отписаться от категории</b>
+    {% for category in post.Category.all %}
+        <a class="btn" href="del_subscribe/{{ category.id }}"><button type="submit"  name="pk" >{{category}}</button></a>
+    {% endfor %}
+{% endif %}
+
+
+<p><a href="http://127.0.0.1:8000/posts/">Вернуться назад</a></p>
+
+
+
 {% endblock content %}
 
