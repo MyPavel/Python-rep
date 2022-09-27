@@ -3,3 +3,14 @@ Ivan_common@example.com France1789
 Sveta_Author@example.com France1789
 
 
+source venv/bin/activate
+python manage.py runserver
+
+
+celery:
+redis-server
+celery -A NewsPaper worker -l INFO
+celery -A NewsPaper worker -l INFO -B - запуск задач по расписанию
+
+crontab(minute='0',
+hour='8', day_of_week='sun')

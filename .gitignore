@@ -1,2 +1,4 @@
 
 NewsPaper/NewsPaper/.env
+NewsPaper/fpages/__pycache__/admin.cpython-310.pyc
+*.pyc
