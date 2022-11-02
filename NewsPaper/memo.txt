@@ -2,7 +2,7 @@ admin@example.com adminadmin
 Ivan_common@example.com France1789
 Sveta_Author@example.com France1789
 
-
+cd ~/PycharmProjects/DjangoEDU/
 source venv/bin/activate
 python manage.py runserver
 
@@ -14,3 +14,13 @@ celery -A NewsPaper worker -l INFO -B - запуск задач по распи�
 
 crontab(minute='0',
 hour='8', day_of_week='sun')
+
+pip install django
+python -m pip install django-filter
+pip install django-allauth
+pip install django-apscheduler
+pip install python-dotenv
+pip3 install celery
+pip3 install redis
+pip3 install -U "celery[redis]"
+

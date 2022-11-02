@@ -6,6 +6,8 @@
 Статья
 {% endblock title %}
 
+{% load cache %}
+{% cache 30 content %}
 {% block content %}
 <p><strong>{{ post.title|censor }}</strong></p>
 <p style="text-align: justify;">{{ post.text|censor }}</p>
@@ -33,4 +35,4 @@
 
 
 {% endblock content %}
-
+{% endcache %}

@@ -1,0 +1,2 @@
+2022-11-02 11:47:48,108 INFO - autoreload - Watching for file changes with StatReloader
+2022-11-02 11:49:18,153 INFO - autoreload - /home/old/PycharmProjects/DjangoEDU/NewsPaper/NewsPaper/settings.py changed, reloading.
