@@ -1,4 +1,5 @@
 
 NewsPaper/NewsPaper/.env
+NewsPaper/NewsPaper/memo.txt
 NewsPaper/fpages/__pycache__/admin.cpython-310.pyc
 *.pyc
