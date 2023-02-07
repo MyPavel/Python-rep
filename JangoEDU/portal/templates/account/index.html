@@ -1,0 +1,43 @@
+{% extends 'flatpages/default.html' %}
+<html lang="en">
+{% block content %}
+<h2>Страница пользователя {{request.user.username}}</h2>
+<div> Приветствуем на игровом портале! Здесь вы можете узнать
+    <p><a href="/articles/">последние объявления</a></p>
+
+
+</div>
+
+<h2>Объявления пользователя {{request.user.username}}</h2>
+{% if author == user.username %}
+        {% if articles %}
+
+           {% for article in articles %}
+           <tr>
+               <div>
+                    <p><strong>{{ article.title }}</strong></p>
+               </div>
+               <div>
+                   <p>{{ article.text|truncatewords:20 }}</p>
+               </div>
+
+               <a href="{% url 'article_detail' article.id %}">Подробнее</a>
+
+               <div>
+                    <p>Категория: {{ article.category }}&nbsp;</p>
+                    <hr />
+                    <p>&nbsp;</p>
+               </div>
+
+           </tr>
+           {% endfor %}
+
+    {% else %}
+       <h2>У вас нет объявлений</h2>
+    {% endif %}
+{% endif %}
+
+
+
+<button> <a href="/accounts/logout/">Выйти</a> </button>
+{% endblock %}

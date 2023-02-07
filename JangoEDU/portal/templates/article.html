@@ -1,0 +1,18 @@
+{% extends 'flatpages/default.html' %}
+<html lang="en">
+{% block title %}
+{{Article.Title }}
+{% endblock title %}
+
+{% block content %}
+<body>
+<h1>{{ article.title }}</h1>
+<b>Описание:</b>
+<p>{{ article.text|truncatewords:20 }}</p>
+<b>Категория:</b>
+<p>{{ article.category }}</p>
+<b>Файлы:</b>
+{{article.upload|safe}}
+</body>
+{% endblock content %}
+</html>
