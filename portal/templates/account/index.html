@@ -1,0 +1,20 @@
+{% extends 'flatpages/default.html' %}
+<html lang="en">
+{% block content %}
+<h2>Страница пользователя {{request.user.username}}</h2>
+<div> Приветствуем на игровом портале! Здесь вы можете узнать:
+    <p>&nbsp;</p>
+    <form action="/articles/">
+        <input type="submit" value="Последние объявления" />
+    </form>
+    <p>&nbsp;</p>
+    <form action="{% url 'responses' %}">
+        <input type="submit" value="Отклики на мои объявления" />
+    </form>
+    <p>&nbsp;</p>
+    <form action="/accounts/logout/">
+        <input type="submit" value="Выйти" />
+    </form>
+</div>
+
+{% endblock %}
