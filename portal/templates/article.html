@@ -1,19 +1,23 @@
-<!DOCTYPE html>
+{% extends 'flatpages/default.html' %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Article.Title</title>
-</head>
+{% block title %}
+{{Article.Title }}
+{% endblock title %}
+
+{% block content %}
 <body>
-<b>Название:</b>
-<p>{{ article.title }}</p>
-<b>Содержание:</b>
-<p>{{ article.text|truncatewords:20 }}</p>
-<b>Категория:</b>
-<p>{{ article.category }}</p>
-
-
-
-
+    <h1>{{ article.title }}</h1>
+    <b>Описание:</b>
+    <p>{{ article.text|truncatewords:20 }}</p>
+    <b>Категория:</b>
+    <p>{{ article.category }}</p>
+    <b>Файлы:</b>
+    {{article.upload|safe}}
+    <b>Автор:</b>
+    <p>{{ article.author }}</p>
+    <td>
+        <a href="{% url 'response' article.id %}"><u> Откликнуться </u></a>
+    </td>
 </body>
+{% endblock content %}
 </html>

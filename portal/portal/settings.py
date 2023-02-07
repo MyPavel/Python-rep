@@ -36,15 +36,27 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.sites',
     'django.contrib.staticfiles',
-    'portalapp',
+    'django.contrib.sites',
+    # Приложения
+    'portalapp.apps.PortalappConfig',
+    # allauth
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.yandex',
+    # Flatpages
+    'django.contrib.flatpages',
+    # CKEditor
+    'ckeditor',
+    'ckeditor_uploader',
+    # App cheduler
+    'django_apscheduler',
 
 ]
+
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -112,6 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
+# python-dotenv
 load_dotenv()
 env_path = Path('.') / '.env'
 load_dotenv(dotenv_path=env_path)
@@ -125,9 +138,6 @@ USE_I18N = True
 USE_TZ = True
 
 SITE_ID = 1
-
-LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
@@ -147,8 +157,28 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [STATIC_DIR]
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_CONFIGS = {'default':
+                        {'toolbar': 'Custom', 'height': 600,'width':1000,'toolbar_Custom':
+                            [
+                                ['Format', 'Bold', 'Link', 'Unlink', 'Image'],
+                                ['CodeSnippet'],
+                            ],'extraPlugins': 'codesnippet',
+                         }}
+
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
+
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
